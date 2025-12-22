@@ -1,6 +1,6 @@
-import { type Question, QuestionTypeLabel } from '../types/questionBanks'
-import { type GeneratedPaper } from '../utils/paperGenerator'
-import { strings } from '../i18n/strings'
+import { type Question, QuestionTypeLabel } from '@/types/questionBanks'
+import { type GeneratedPaper } from '@utils/paperGenerator'
+import { strings } from '@i18n/strings'
 
 interface PaperPreviewProps {
   paper: GeneratedPaper | null

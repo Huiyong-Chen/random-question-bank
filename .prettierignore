@@ -1,0 +1,9 @@
+node_modules
+dist
+storybook-static
+*.log
+pnpm-lock.yaml
+coverage
+.turbo
+.DS_Store
+

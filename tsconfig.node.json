@@ -22,5 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.mts",
+    "eslint.config.mjs",
+    "lint-staged.config.mjs"
+  ],
+  "exclude": [".storybook"]
 }

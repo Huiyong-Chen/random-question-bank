@@ -1,5 +1,5 @@
-import { useRoleDisplayNames } from '../hooks/useRoleDisplayNames'
-import { strings } from '../i18n/strings'
+import { useRoleDisplayNames } from '@hooks/useRoleDisplayNames'
+import { strings } from '@i18n/strings'
 
 interface RoleSelectorProps {
   roles: string[]

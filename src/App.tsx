@@ -1,15 +1,16 @@
-import { useMemo, useState } from 'react'
+import { lazy, Suspense, useMemo, useState } from 'react'
 import './App.css'
-import { RoleSelector } from './components/RoleSelector'
-import { RatioSettings } from './components/RatioSettings'
-import { PaperPreview } from './components/PaperPreview'
-import { ImportPage } from './pages/ImportPage'
-import { generatePaper, type GeneratedPaper, type RatioMap } from './utils/paperGenerator'
-import { QuestionTypeOrder, type QuestionType } from './types/questionBanks'
-import { buildDoc, downloadDoc } from './utils/docExporter'
-import { useQuestionBanks } from './hooks/useQuestionBanks'
-import { useRoleDisplayNames } from './hooks/useRoleDisplayNames'
-import { strings } from './i18n/strings'
+import { PaperPreview } from '@components/PaperPreview'
+import { RatioSettings } from '@components/RatioSettings'
+import { RoleSelector } from '@components/RoleSelector'
+import { useQuestionBanks } from '@hooks/useQuestionBanks'
+import { useRoleDisplayNames } from '@hooks/useRoleDisplayNames'
+import { strings } from '@i18n/strings'
+import { buildDoc, downloadDoc } from '@utils/docExporter'
+import { generatePaper, type GeneratedPaper, type RatioMap } from '@utils/paperGenerator'
+import { QuestionTypeOrder, type QuestionType } from '@/types/questionBanks'
+
+const ImportPage = lazy(() => import('@pages/ImportPage'))
 
 type Page = 'home' | 'import'
 
@@ -71,21 +72,21 @@ const App = () => {
 
   const handleGenerate = () => {
     if (!selectedRole) {
-    setMessage(strings.app.messageNoRole)
+      setMessage(strings.app.messageNoRole)
       return
     }
     if (!targetScore || targetScore <= 0) {
-    setMessage(strings.app.messageNoTarget)
+      setMessage(strings.app.messageNoTarget)
       return
     }
     if (totalRatio <= 0) {
-    setMessage(strings.app.messageNoRatio)
+      setMessage(strings.app.messageNoRatio)
       return
     }
 
     const bank = questionBanks[selectedRole]
     if (!bank) {
-    setMessage(strings.app.messageNoBank)
+      setMessage(strings.app.messageNoBank)
       return
     }
 
@@ -104,11 +105,11 @@ const App = () => {
 
     setPaper({ ...generated, list: sortedList })
     if (sortedList.length === 0) {
-    setMessage(strings.app.messageEmptyResult)
+      setMessage(strings.app.messageEmptyResult)
       return
     }
     if (generated.shortfall) {
-    setMessage(`${strings.app.messageShortfallPrefix} ${generated.shortfall} 分`)
+      setMessage(`${strings.app.messageShortfallPrefix} ${generated.shortfall} 分`)
       return
     }
     setMessage(strings.app.messageGenerated)
@@ -174,10 +175,15 @@ const App = () => {
   if (currentPage === 'import') {
     return (
       <div className="app-container">
-        <ImportPage 
-          onBack={() => setCurrentPage('home')} 
-          onImportSuccess={handleImportSuccess}
-        />
+        <Suspense
+          fallback={
+            <div className="loading-state">
+              <p>{strings.app.loading}</p>
+            </div>
+          }
+        >
+          <ImportPage onBack={() => setCurrentPage('home')} onImportSuccess={handleImportSuccess} />
+        </Suspense>
       </div>
     )
   }

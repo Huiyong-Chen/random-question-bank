@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { QuestionBankImporter } from '../components/QuestionBankImporter'
-import { getAllRoleIds, saveRoleInfo, type RoleInfo } from '../utils/indexedDB'
-import { useQuestionBanks } from '../hooks/useQuestionBanks'
-import { useRoleDisplayNames } from '../hooks/useRoleDisplayNames'
-import { strings } from '../i18n/strings'
+import { QuestionBankImporter } from '@components/QuestionBankImporter'
+import { useQuestionBanks } from '@hooks/useQuestionBanks'
+import { useRoleDisplayNames } from '@hooks/useRoleDisplayNames'
+import { strings } from '@i18n/strings'
+import { getAllRoleIds, saveRoleInfo, type RoleInfo } from '@utils/indexedDB'
 
-export const ImportPage = ({ 
+const ImportPage = ({ 
   onBack,
   onImportSuccess 
 }: { 
@@ -168,4 +168,6 @@ export const ImportPage = ({
     </div>
   )
 }
+
+export default ImportPage
 

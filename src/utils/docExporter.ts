@@ -6,8 +6,8 @@ import {
   Paragraph,
   TextRun,
 } from 'docx'
-import { type Question, QuestionTypeEnum, QuestionTypeLabel } from '../types/questionBanks'
-import { strings } from '../i18n/strings'
+import { strings } from '@i18n/strings'
+import { type Question, QuestionTypeEnum, QuestionTypeLabel } from '@/types/questionBanks'
 
 const questionTitle = (q: Question, index: number) =>
   `${index + 1}. [${QuestionTypeLabel[q.type]}] ${q.title} (${q.score}分)`

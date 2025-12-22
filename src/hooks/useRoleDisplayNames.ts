@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getRoleDisplayNames } from '../utils/indexedDB'
+import { getRoleDisplayNames } from '@utils/indexedDB'
 
 export const useRoleDisplayNames = () => {
   const [roleDisplayNames, setRoleDisplayNames] = useState<Record<string, string>>({})

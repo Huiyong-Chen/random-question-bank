@@ -4,9 +4,9 @@ import {
   type Question,
   type QuestionByType,
   type QuestionType,
-} from "../types/questionBanks";
-import { saveQuestionBankByRole } from "../utils/indexedDB";
-import { keyToType } from "../utils/typeMapper";
+} from "@/types/questionBanks";
+import { saveQuestionBankByRole } from "@utils/indexedDB";
+import { keyToType } from "@utils/typeMapper";
 
 interface QuestionBankImporterProps {
   selectedRole: string;

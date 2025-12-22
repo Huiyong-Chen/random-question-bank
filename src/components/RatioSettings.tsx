@@ -1,5 +1,5 @@
-import { type QuestionType, QuestionTypeLabel } from '../types/questionBanks'
-import { strings } from '../i18n/strings'
+import { type QuestionType, QuestionTypeLabel } from '@/types/questionBanks'
+import { strings } from '@i18n/strings'
 
 interface RatioSettingsProps {
   currentTypes: QuestionType[]

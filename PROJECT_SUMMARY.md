@@ -44,35 +44,54 @@
 ```
 random-question-bank/
 ├── src/
-│   ├── components/          # React 组件
-│   │   ├── PaperPreview.tsx         # 试卷预览组件
-│   │   ├── RatioSettings.tsx        # 权重设置组件
-│   │   └── RoleSelector.tsx          # 岗位选择组件
-│   ├── data/                # 数据定义
-│   │   └── questionBanks.ts         # 题目类型和数据结构
-│   ├── hooks/               # 自定义 Hooks
-│   │   ├── useQuestionBanks.ts      # 题库数据管理 Hook
-│   │   └── useRoleDisplayNames.ts   # 角色显示名称 Hook
-│   ├── i18n/                # 国际化
-│   │   └── strings.ts               # 中文字符串资源
-│   ├── pages/               # 页面组件
-│   │   └── ImportPage.tsx           # 导入页面
-│   ├── utils/               # 工具函数
-│   │   ├── docExporter.ts           # Word 文档导出
-│   │   ├── indexedDB.ts             # IndexedDB 数据管理
-│   │   ├── paperGenerator.ts        # 试卷生成算法
-│   │   └── typeMapper.ts            # 类型映射工具
-│   ├── App.tsx              # 主应用组件
-│   ├── App.css              # 应用样式
-│   ├── index.css            # 全局样式
-│   └── main.tsx             # 应用入口
-├── public/                  # 静态资源
-├── dist/                    # 构建输出
-├── package.json             # 项目配置
-├── tsconfig.json            # TypeScript 配置
-├── vite.config.ts           # Vite 配置
-└── eslint.config.js         # ESLint 配置
+│   ├── components/              # React 组件
+│   │   ├── PaperPreview.tsx     # 试卷预览组件
+│   │   ├── RatioSettings.tsx    # 权重设置组件
+│   │   ├── RoleSelector.tsx     # 岗位选择组件
+│   │   └── QuestionBankImporter.tsx # 题库导入组件
+│   ├── hooks/                   # 自定义 Hooks
+│   │   ├── useQuestionBanks.ts  # 题库数据管理 Hook
+│   │   └── useRoleDisplayNames.ts # 角色显示名称 Hook
+│   ├── i18n/                    # 国际化
+│   │   └── strings.ts           # 中文字符串资源
+│   ├── pages/                   # 页面组件
+│   │   └── ImportPage.tsx       # 导入页面
+│   ├── types/                   # 类型定义
+│   │   └── questionBanks.ts
+│   ├── utils/                   # 工具函数
+│   │   ├── docExporter.ts       # Word 文档导出
+│   │   ├── indexedDB.ts         # IndexedDB 数据管理
+│   │   ├── paperGenerator.ts    # 试卷生成算法
+│   │   └── typeMapper.ts        # 类型映射工具
+│   ├── App.tsx                  # 主应用组件
+│   ├── App.css                  # 应用样式
+│   ├── index.css                # 全局样式
+│   └── main.tsx                 # 应用入口
+├── public/                      # 静态资源
+├── dist/                        # 构建输出
+├── package.json                 # 项目配置
+├── tsconfig.json                # TypeScript 配置
+├── tsconfig.app.json            # 应用编译配置
+├── tsconfig.node.json           # 工具/脚本编译配置
+├── vite.config.mts              # Vite 配置（ESM）
+└── eslint.config.mjs            # ESLint 配置（ESM）
 ```
+
+### 路径别名（`tsconfig.app.json`）
+- `@components/*` → `src/components/*`
+- `@hooks/*` → `src/hooks/*`
+- `@pages/*` → `src/pages/*`
+- `@services/*` → `src/services/*`
+- `@types/*` → `src/types/*`
+- `@utils/*` → `src/utils/*`
+- `@i18n/*` → `src/i18n/*`
+
+### 构建与性能
+- 严格 ESM：`package.json` `type: module`，配置文件使用 `.mjs/.mts`
+- 代码分割：`ImportPage` 采用 `React.lazy` + `Suspense` 懒加载
+- 分包策略：Vite `manualChunks` 抽离 `react`、`docx`
+- 体积分析：`pnpm run analyze` 生成 `dist/stats.html`（rollup-visualizer）
+- 环境变量示例：`.env.example` 使用 `VITE_` 前缀
 
 ---
 

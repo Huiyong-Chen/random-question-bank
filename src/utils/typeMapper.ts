@@ -1,4 +1,4 @@
-import { QuestionTypeEnum, type QuestionType } from '../types/questionBanks'
+import { QuestionTypeEnum, type QuestionType } from '@/types/questionBanks'
 
 // 英文存储 key -> 数值枚举
 const keyToEnumMap: Record<string, QuestionType> = {

@@ -1,4 +1,4 @@
-import { type Question, type QuestionType } from '../types/questionBanks'
+import { type Question, type QuestionType } from '@/types/questionBanks'
 
 export type RatioMap = Record<QuestionType, number>
 
@@ -12,10 +12,12 @@ const randomPick = <T,>(items: T[]): T =>
   items[Math.floor(Math.random() * items.length)]
 
 const buildWeightedPicker = (ratios: RatioMap) => {
-  const entries = Object.entries(ratios).filter(([, weight]) => weight > 0)
+  const entries = (Object.entries(ratios) as unknown as [QuestionType, number][]).filter(
+    ([, weight]) => weight > 0,
+  )
   const totalWeight = entries.reduce((acc, [, weight]) => acc + weight, 0)
 
-  return () => {
+  return (): QuestionType | null => {
     if (entries.length === 0 || totalWeight <= 0) return null
     let roll = Math.random() * totalWeight
     for (const [type, weight] of entries) {
@@ -34,12 +36,12 @@ export const generatePaper = (
   if (!bank) return { list: [], totalScore: 0 }
 
   const ratios = Object.fromEntries(
-    Object.keys(bank).map((type) => [type, ratioInput[type] ?? 0]),
+    (Object.keys(bank) as unknown as QuestionType[]).map((type) => [type, ratioInput[type] ?? 0]),
   ) as RatioMap
 
   const picker = buildWeightedPicker(ratios)
   const available = Object.fromEntries(
-    Object.entries(bank).map(([type, list]) => [type, [...list]]),
+    (Object.entries(bank) as unknown as [QuestionType, Question[]][]).map(([type, list]) => [type, [...list]]),
   ) as Record<QuestionType, Question[]>
 
   const result: Question[] = []

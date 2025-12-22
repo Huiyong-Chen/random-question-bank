@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
-import { type QuestionBanks, type QuestionByType } from '../types/questionBanks'
-import {
-  getAllQuestionBanks,
-  getQuestionBankByRole,
-} from '../utils/indexedDB'
+import { type QuestionBanks, type QuestionByType } from '@/types/questionBanks'
+import { getAllQuestionBanks, getQuestionBankByRole } from '@utils/indexedDB'
 
 export const useQuestionBanks = () => {
   const [questionBanks, setQuestionBanks] = useState<QuestionBanks>({})

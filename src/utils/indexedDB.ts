@@ -1,4 +1,4 @@
-import { type QuestionByType, type QuestionBanks, type Question } from '../types/questionBanks'
+import { type QuestionByType, type QuestionBanks, type Question } from '@/types/questionBanks'
 import { typeToKey, keyToType } from './typeMapper'
 
 const DB_NAME = 'QuestionBankDB'
